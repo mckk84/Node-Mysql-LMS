@@ -1,0 +1,28 @@
+<ul class="px-1 py-1 w-full border bg-navy-100 list-none rounded-lg shadow-md block">
+	<li class="<%- ( url == '/') ? 'bg-indigo-100 rounded' : 'text-white' %>">
+		<a href="/" title="Dashboard" class="w-full block mt-2 px-2 py-2 hover:text-indigo-500 ">
+		<img src="/assets/images/menu.png" class="inline-block w-4 h-4">
+		<span class="inline-block h4 align-middle">Dashboard</span>
+		</a>
+	</li>
+	<li class="<%- ( url.search('courses') == 1 ? 'bg-indigo-100 rounded' : 'text-white' ) %>">
+		<a href="/courses" title="Courses" class="w-full block mt-2 px-2 py-2 hover:text-indigo-500 ">
+		<img src="/assets/images/menu.png" class="inline-block w-4 h-4">
+		<span class="inline-block h4 align-middle">Courses</span></a>
+	</li>
+	<li class="<%- ( url.search('students') == 1 ? 'bg-indigo-100 rounded' : 'text-white' ) %>">
+		<a href="/students" title="Students" class="w-full block mt-2 px-2 py-2 hover:text-indigo-500 ">
+		<img src="/assets/images/menu.png" class="inline-block w-4 h-4">
+		<span class="inline-block h4 align-middle">Students</span></a>
+	</li>
+	<li class="<%- ( url.search('instructors') == 1 ? 'bg-indigo-100 rounded' : 'text-white' ) %>">
+		<a href="/instructors" title="Instructors" class="w-full block mb-2 px-2 py-2 hover:text-indigo-500 ">
+		<img src="/assets/images/menu.png" class="inline-block w-4 h-4">
+		<span class="inline-block h4 align-middle">Instructors</span></a>
+	</li>
+	<li class="<%- ( url.search('certificates') == 1 ? 'bg-indigo-100 rounded' : 'text-white' ) %>">
+		<a href="/certificates" title="Certificates" class="w-full block mt-2 px-2 py-2 hover:text-indigo-500 "><span class="inline-block h4 align-middle">
+		<img src="/assets/images/menu.png" class="inline-block w-4 h-4">
+		<span class="inline-block h4 align-middle">Certificates</span></span></a>
+	</li>
+</ul>

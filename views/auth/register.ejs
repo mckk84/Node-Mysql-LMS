@@ -1,0 +1,52 @@
+<div class="p-8 lg:w-1/2 mx-auto">
+  <div class="bg-white rounded-b-lg py-12 px-4 lg:px-24">
+    <p class="text-center text-xl text-gray-700 font-semibold">
+      Register
+    </p>
+    <%- include('../partials/errors.ejs') %>
+    <form class="mt-6" method="post">
+      <div class="relative">
+        <input
+          class="appearance-none border pl-2 border-gray-500 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
+          required
+          name="name"
+          id="name"
+          type="text"
+          placeholder="Name"
+        />
+      </div>
+      <div class="relative mt-3">
+        <input
+          class="appearance-none border pl-2 border-gray-500 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
+          required
+          name="email"
+          id="email"
+          type="text"
+          placeholder="Email"
+        />
+      </div>
+      <div class="relative mt-3">
+        <input
+          class="appearance-none border pl-2 border-gray-500 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
+          required
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Password"
+        />
+      </div>
+      <div class="relative mt-3">
+        <select name="type" id="type" class="appearance-none pl-2 border border-gray-500 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline">
+          <option value="Student">Student</option>
+          <option value="Instructor">Instructor</option>
+        </select>
+      </div>
+      <div class="flex items-center justify-center gap-10 mt-8">
+        <button type="submit" 
+          class="text-white py-2 px-4 uppercase rounded bg-indigo-500 hover:bg-indigo-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+          Sign Up
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

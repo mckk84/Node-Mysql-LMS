@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><%=title%></title>
+	<link rel="stylesheet" href="/assets/css/style.css">
+	<script type="text/javascript" defer src="/assets/js/jquery-3.6.3.min.js"></script>
+</head>
+<body class="h-screen bg-indigo-50 relative">
+	<% if( typeof user != 'undefined' ) { %>
+		<%- include('../partials/header.ejs') %>
+	<% } %>
+	
+	<% if( typeof user != 'undefined' ) { %>
+		<main class="w-full h-full flex align-middle justify-center">
+			<div class="h-100 w-64 px-1 py-2">
+			  <% if( typeof isAuth != 'undefined' ) { %>
+			  <%- include('../partials/account-sidebar.ejs') %>
+			  <% } else { %>
+			  <%- include('../partials/'+user.type.toLowerCase()+'-sidebar.ejs') %>
+			  <% }  %>
+			</div>
+			<div class="h-100 mx-auto md:w-4/5 py-2">
+				<%- body -%>
+			</div>
+		</main>
+	<% } else { %>
+		<main class="w-full h-full flex items-center align-middle justify-center">
+			<%- body -%>
+		</main>
+
+	<% } %>
+
+	<footer class="w-full border-t border-gray-100 px-2 py-2">
+		<p class="mb-0 text-sm text-center">Copyright © 2023 express-validator</p>
+	</footer>
+	<script type="text/javascript" defer src="/assets/js/custom.js"></script>
+</body>
+</html>

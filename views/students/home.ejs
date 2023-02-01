@@ -1,0 +1,40 @@
+<div class="w-full py-2">
+  <%- include('../partials/errors.ejs') %>
+  <div class="w-full px-4 lg:px-2">
+    Welcome <%=user.name%>
+  </div>
+  <div class="flex align-middle justify-start w-full px-2 py-2"> 
+
+    <div class="flex align-middle justify-center space-x-4">
+
+      <button class="flex flex-col items-center bg-green-600 rounded-md px-4 text-sm text-white py-4 font-medium hover:border-gray-100 hover:shadow-lg">
+        <div data-id="<%=user.id%>" class="coursesAcceptedStudent px-2 py-2 text-5xl align-middle justify-start">
+          ..
+        </div>
+        <div class="px-4 py-4 text-2xl flex align-middle justify-start">
+          <p>Currently Reading</p>
+        </div>
+      </button>
+
+      <button class="flex flex-col items-center bg-purple-600 rounded-md px-4 text-sm text-white py-4 font-medium hover:border-grey-500 hover:shadow-lg">
+        <div data-id="<%=user.id%>" class="coursesAssignedtoStudent px-2 py-2 text-5xl align-middle justify-start">
+          ..
+        </div>
+        <div class="px-4 py-4 text-2xl flex align-middle justify-start">
+          <p>New Courses Assigned</p>
+        </div>
+      </button>
+
+      <button class="flex flex-col items-center bg-gray-500 rounded-md px-4 text-sm text-white py-4 font-medium hover:border-grey-500 hover:shadow-lg">
+        <div data-id="<%=user.id%>" class="coursesCompletedStudent px-2 py-2 text-5xl flex align-middle justify-start">
+          ..
+        </div>
+        <div class="px-4 py-4 text-2xl flex align-middle justify-start">
+          <p>Courses Completed</p>
+        </div>
+      </button>
+
+    </div>
+
+  </div>
+</div>

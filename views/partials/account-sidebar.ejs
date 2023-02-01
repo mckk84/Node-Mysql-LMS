@@ -1,0 +1,14 @@
+<ul class="px-1 py-2 w-full border bg-navy-100 list-none rounded-lg shadow-md block">
+	<li class="<%- ( url.search('account') == 1 ? 'bg-indigo-100 rounded' : 'text-white' ) %>">
+		<a href="/account" title="Profile" class="w-full block mt-2 px-2 py-2 hover:text-indigo-500">
+		<img src="/assets/images/menu.png" class="inline-block w-4 h-4">
+		<span class="inline-block h4 align-middle">Profile</span>
+		</a>
+	</li>
+	<li class="<%- ( url.search('change-password') == 1 ? 'bg-indigo-100 rounded' : 'text-white' ) %>">
+		<a href="/change-password" class="w-full block px-2 mt-2 py-2 hover:text-indigo-500">
+		<img src="/assets/images/menu.png" class="inline-block w-4 h-4">
+		<span class="inline-block h4 align-middle">Change Password</span>
+		</a>
+	</li>
+</ul>

@@ -1,0 +1,19 @@
+<header class="w-full py-1 px-2 bg-navy-100 flex align-middle justify-between shadow-sm">
+	<div class="text-white p-1">
+		<a title="Dashboard" class="text-xl font-medium" href="/"><%=user.type%> </a> / <%=page_title%>
+	</div>
+	<div class="p-1 w-auto">
+		<div class="flex flex-col">
+			<div class="w-full flex align-middle justify-start gap-1 px-2 py-1">
+				<h5 class="title-font font-medium text-lg text-white"><%=user.name%></h5>
+				<div class="relative">
+				  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="cursor-pointer userMenu text-white w-6 h-6 mb-1 inline-block" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+	              <ul class="list-none block absolute right-0 mt-1 bg-white px-4 shadow-sm border border-gray-400 rounded invisible w-28">
+	              	<li><a class="block w-full text-center py-2 text-sm hover:text-indigo-500 hover:underline" href="/account">Account</a></li>
+	              	<li><a class="block w-full text-center py-2 text-sm hover:text-indigo-500 hover:underline" href="/logout">Logout</a></li>
+	              </ul>
+	            </div>
+		  	</div>
+		</div>
+	</div>
+</header>
