@@ -1,0 +1,25 @@
+<%- include('../partials/errors.ejs') %>
+<div class="p-2 flex flex-col gap-2">
+  <div class='mb-2 content-header border border-navy-100 px-2 py-1 flex align-middle justify-between'>
+    <p class="font-medium text-2xl mb-0"><%=title%></p>
+    <a class="font-medium text-sm py-1 mb-0 hover:text-indigo-500 hover:underline" href="/courses/view/<%=record.course_id%>">Back</a>
+  </div>
+  <div class="w-full rounded-lg py-1 px-2 bg-white">
+      <div class="mt-2 border-b py-2 mb-2 flex align-middle justify-between gap-4">
+        <div>Course : <b><%=record.name%></b></div>
+      </div>
+      <% if( record.type == 'content' ) { %>
+      <div class="w-full px-2 mt-4 mb-2 py-2 ">
+        <%=record.description%>
+      </div>
+      <% } else if( record.type == 'video' ) { %>
+      <div class="w-full px-2 mt-4 mb-2 py-2 ">
+        <video id="video1" width="640" height="360" controls loop >
+          <source src="/assets/uploads/<%=record.link%>" type="video/mp4" >
+            Your browser shall not play this video
+        </video>
+      </div>
+      <% } %>    
+  </div>
+</div>    
+

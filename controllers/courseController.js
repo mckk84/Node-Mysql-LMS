@@ -3,8 +3,12 @@ const courseAssignModel = require("../models/courseAssignModel");
 const lessonsModel = require("../models/lessonsModel");
 const studentsModel = require("../models/studentsModel");
 const certificatesModel = require('../models/certificatesModel');
+const coursesMaterialModel = require('../models/courseMaterialModel')
+let fs = require('fs');
+let formidable = require('formidable');
 var validator = require('validator');
 var moment = require('moment');
+let path = require('path');
 
 exports.getAll = async (req, res, next) => 
 { 
@@ -144,6 +148,7 @@ exports.viewCourse = async (req, res, next) =>
         let lessons = await lessonsModel.getLessons(course.id); 
         let lessons_status = await lessonsModel.getStudentLessons(course.id, user.id); 
         let course_assigned = await courseAssignModel.getStudentsAssignedCourse(course.id);
+        let course_material = await coursesMaterialModel.getMaterials(course.id);
         if( user.type == 'Student' )
         {
             course_student_status = await courseAssignModel.getStudentsAssignedCourseStatus(course.id, user.id);
@@ -157,7 +162,8 @@ exports.viewCourse = async (req, res, next) =>
                                     students:students,
                                     course_student_status:course_student_status,
                                     lessons_status:lessons_status,
-                                    students_assigned:course_assigned     
+                                    students_assigned:course_assigned,     
+                                    course_material:course_material
                                 });   
     } catch(err) {
         req.session.error = err.message;
@@ -253,4 +259,101 @@ exports.deleteAssignCourse = async (req, res, next) =>
         req.session.success = '';
         res.redirect('/courses/view/'+req.params.course_id);
     }    
+}
+
+
+exports.addMeterial = async (req, res, next) => 
+{
+    if( !validator.isEmpty(req.params.id)
+        && !validator.isEmpty(req.body.material_type) )   
+    {
+        if( req.body.material_type == 'video' )
+        {
+            let newpath = path.join(__dirname, "../assets/uploads/");
+            let newfile = Date.now()+req.files.video.name;
+            newpath += newfile;
+
+            fs.writeFileSync(newpath, req.files.video.data);
+
+            let newmaterial = {};
+            newmaterial.body = {};
+            newmaterial.body.material_type = req.body.material_type;
+            newmaterial.body.link = newfile;
+            newmaterial.body.content = '';
+            newmaterial.params = {};
+            newmaterial.params.id = req.params.id;
+            await coursesMaterialModel.addCourseMaterial(newmaterial).then(response => 
+            {
+                res.json({error:0, message:response});
+
+            }).catch(err => {
+                res.json({error:1, message:err.message});
+            });
+        }
+        else
+        {
+            await coursesMaterialModel.addCourseMaterial(req).then(response => 
+            {
+                res.json({error:0, message:response});
+
+            }).catch(err => {
+                res.json({error:1, message:err.message});
+            });
+        }
+    }
+    else
+    {
+        res.json({error:1, message:"Invalid Data"});
+    }    
+}
+
+exports.viewMeterial = async (req, res, next) => 
+{
+    let user = req.session.user;
+    res.locals.url = req.url;
+    if( !validator.isEmpty(req.params.id) )   
+    {
+        await coursesMaterialModel.getMaterial(req.params.id).then(record => 
+        {
+            res.render('courses/viewMaterial', {user:user,title:'Course Docs',page_title:'Course Docs',record:record});   
+        }).catch(err => {
+            req.session.error = err.message;
+            req.session.success = '';
+            res.redirect('/courses');       
+        });
+    }
+    else
+    {
+        req.session.error = err.message;
+        req.session.success = '';
+        res.redirect('/courses');
+    }
+}
+
+
+exports.deleteMeterial = async (req, res, next) => 
+{
+    let user = req.session.user;
+    res.locals.url = req.url;
+    if( !validator.isEmpty(req.params.id) )   
+    {
+        await coursesMaterialModel.deleteMaterial(req.params.id).then(response => 
+        {
+            req.session.error = '';
+            req.session.success = response;
+            res.redirect('/courses/view/'+req.params.course_id);         
+
+        }).catch(err => 
+        {
+            req.session.error = err.message;
+            req.session.success = '';
+            res.redirect('/courses/view/'+req.params.course_id);       
+        });
+    }
+    else
+    {
+        req.session.error = err.message;
+        req.session.success = '';
+        res.redirect('/courses');
+    }
 }

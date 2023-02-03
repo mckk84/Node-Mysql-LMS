@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="/assets/css/style.css">
 	<script type="text/javascript" defer src="/assets/js/jquery-3.6.3.min.js"></script>
 </head>
-<body class="h-screen bg-indigo-50 relative">
+<body class="min-h-screen bg-indigo-50 relative">
 	<% if( typeof user != 'undefined' ) { %>
 		<%- include('../partials/header.ejs') %>
 	<% } %>
@@ -21,7 +21,7 @@
 			  <%- include('../partials/'+user.type.toLowerCase()+'-sidebar.ejs') %>
 			  <% }  %>
 			</div>
-			<div class="h-100 mx-auto md:w-4/5 py-2">
+			<div class="h-full mx-auto md:w-4/5 py-2">
 				<%- body -%>
 			</div>
 		</main>
@@ -32,7 +32,7 @@
 
 	<% } %>
 
-	<footer class="w-full border-t border-gray-100 px-2 py-2">
+	<footer class="w-full border-t mt-4 border-gray-100 px-2 py-2">
 		<p class="mb-0 text-sm text-center">Copyright © 2023 express-validator</p>
 	</footer>
 	<script type="text/javascript" defer src="/assets/js/custom.js"></script>
