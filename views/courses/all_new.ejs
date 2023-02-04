@@ -1,0 +1,48 @@
+<%- include('../partials/errors.ejs') %>
+<div class="p-2 flex flex-col gap-2">
+  <div class='mb-2 content-header rounded px-2 py-1 flex align-middle justify-between'>
+    <p class="font-medium text-xl mb-0">Courses</p>
+    <% if( user.type !== 'Student' ) { %>
+    <a class="font-medium text-sm py-1 px-2 border border-navy-100 shadow-md rounded-lg mb-0 hover:text-white hover:underline hover:bg-navy-100" href="/courses/add">Add Course</a>
+    <% } else { %>
+    <select id="filterCourses" name="status" class="w-64 bg-white border border-gray-500 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700">
+      <option selected value="All">All</option>
+      <option value="Assigned">Assigned</option>
+      <option value="Accepted">Accepted</option>
+    </select>
+    <% } %>
+  </div>
+  <div class="w-full mx-auto overflow-auto">
+    <% if( typeof records !== "undefined" && records.length ) { %>
+      <div class="w-full flex gap-2 whitespace-no-wrap">
+      <% records.forEach(function(rowObj, index) { %>
+      <div class="w-64 px-2 py-2 bg-white rounded-lg shadow-md border">
+        <div onclick="window.location.href='/courses/view/<%=rowObj.id%>'" class="card-header cursor-pointer border-b flex align-middle justify-between">
+          <span class="font-semibold">
+            <%=rowObj.name%>
+          </span>
+          <span class="font-semibold">
+            <%=rowObj.type%>
+          </span>
+        </div>
+        <div onclick="window.location.href='/courses/view/<%=rowObj.id%>'" class="card-body cursor-pointer py-2 flex align-middle justify-between">
+          <span class="text-sm font-normal">
+            <%=rowObj.description.substr(0, 100)%>
+          </span>
+        </div>
+        <%if( user.type != 'Student'){%>
+        <div class="card-footer pt-2 flex align-middle justify-between">
+          <a class="edit text-sm text-indigo-500 hover:underline" href="/courses/edit/<%=rowObj.id%>">Edit</a>
+          <a class="delete text-sm text-red-500 hover:underline" href="/courses/delete/<%=rowObj.id%>">Delete</a>
+        </div>
+        <% } %>
+      </div>
+      <% }) %>
+      <% } else { %>
+      <div class="table-responsive w-100 p-2">
+            <p>No Records found.</p>
+        </div>
+    <% } %>
+
+  </div>    
+</div>

@@ -198,7 +198,7 @@ exports.getStudentCertificates = async (user_id) => {
         return await new Promise((resolve, reject) => 
         {
             try{
-                const query = "SELECT * FROM certificates WHERE student_id = ? ORDER BY id ASC";
+                const query = "SELECT crt.id,crs.name as course_name, crt.score, crt.remarks, crt.status,u.name as instructor FROM certificates as crt LEFT JOIN courses as crs ON crt.course_id=crs.id LEFT JOIN users as u ON u.id=crt.instructor_id WHERE crt.student_id = ? ORDER BY crt.id ASC";
                 db_con.query(query, [ user_id ], (err, results) => 
                 {
                     db_con.end();

@@ -19,7 +19,7 @@ exports.getAll = async (req, res, next) =>
         case 'Student': 
             await coursesModel.getStudentCourses(req.session.user.id).then(records => 
             {
-                res.render('courses/all', {user:user,title:'Courses',page_title:'Courses',records:records});    
+                res.render('courses/all_new', {user:user,title:'Courses',page_title:'Courses',records:records});    
 
             }).catch(err => {
                 var error = err.message;
@@ -42,7 +42,7 @@ exports.getAll = async (req, res, next) =>
             await coursesModel.getInstructorCourses(req.session.user.id).then(records => 
             {
                 res.locals.url = req.url;
-                res.render('courses/all', {user:user,title:'Courses',page_title:'Courses',records:records});    
+                res.render('courses/all_new', {user:user,title:'Courses',page_title:'Courses',records:records});    
 
             }).catch(err => {
                 var error = err.message;

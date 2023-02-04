@@ -245,7 +245,7 @@ exports.getStudentCourses = async (user_id) => {
         return await new Promise((resolve, reject) => 
         {
             try{
-                const query = "SELECT crs.id, crs.course_code, crs.name,crs.type, crs.is_active as published, u.name as assigned_by, ca.status FROM course_assign as ca LEFT JOIN courses as crs ON ca.course_id=crs.id LEFT JOIN users as u ON ca.assigned_by=u.id WHERE ca.student_id = ? ";
+                const query = "SELECT crs.id, crs.course_code, crs.name,crs.description,crs.type, crs.is_active as published, u.name as assigned_by, ca.status FROM course_assign as ca LEFT JOIN courses as crs ON ca.course_id=crs.id LEFT JOIN users as u ON ca.assigned_by=u.id WHERE ca.student_id = ? ";
                 db_con.query(query, [ user_id ], (err, results) => 
                 {
                     db_con.end();

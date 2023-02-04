@@ -152,6 +152,8 @@ exports.viewCertificate = async (req, res, next) => {
             await pdf.generatePdf(data, template, pdfpath).then(response => {
 
                 console.log('PDF Generated');
+                res.header('Content-Type', 'application/pdf');
+                res.header('Content-Disposition', "attachment;filename=certificate"+certificate.id+".pdf");
                 res.sendFile(pdfpath);
 
             }).catch(err => 
