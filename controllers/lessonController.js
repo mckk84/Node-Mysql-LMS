@@ -1,5 +1,7 @@
 const lessonsModel = require("../models/lessonsModel");
 const coursesModel = require("../models/coursesModel");
+const courseAssignModel = require('../models/courseAssignModel');
+
 var validator = require('validator');
 var moment = require('moment');
 
