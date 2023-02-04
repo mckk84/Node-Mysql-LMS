@@ -58,6 +58,7 @@ exports.viewLesson = async (req, res, next) =>
     try{
         let lesson = await lessonsModel.getLessonById(req.params.lesson_id);
         let course = await coursesModel.getCourse(lesson.course_id);
+        let lessonStatus = await lessonsModel.StudentLessonStatus(course.id, user.id, req.params.lesson_id);
         if( user.type == 'Student' )
         {
             let course_assigned = await courseAssignModel.getCourseAssigned(user.id, course.id);
@@ -69,7 +70,7 @@ exports.viewLesson = async (req, res, next) =>
             }
         }
         
-        res.render('lessons/view', {user:user,title:'Lessons',page_title:'Lessons',course:course,lesson:lesson});  
+        res.render('lessons/view', {user:user,title:'Lessons',page_title:'Lessons',course:course,lesson:lesson,lesson_status:lessonStatus});  
         
     } catch (err){
         req.session.error = err.message;

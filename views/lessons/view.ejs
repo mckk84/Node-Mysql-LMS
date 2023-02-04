@@ -15,7 +15,7 @@
   <div class="w-full border py-1 px-2 bg-white">
       <div class="mt-4 mb-2 flex align-middle justify-between gap-4">
         <div>Lesson Name : <b><%=lesson.name%></b></div>
-        <% if( user.type == 'Student' ) { %>
+        <% if( user.type == 'Student' && lesson_status != 'Completed' ) { %>
           <div><a data-lesson="<%=lesson.id%>" data-student="<%=user.id%>" data-action="Completed" data-course="<%=course.id%>" href="/students/status/lesson" class="inline-action-update inline-block text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-5 py-2 text-center bg-blue-600">Mark as Complete</a>
           </div>
         <% } %>

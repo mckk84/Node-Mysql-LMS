@@ -102,8 +102,9 @@ exports.actionCourse = async(req) =>
                     if( req.body.status == 'Completed' )
                     {
                         // check all lessons are read
-                        lessonsModel.getLessons(req.body.course).then(lessonsInCourse => {
-                            lessonsModel.StudentLessonCompleted(req.body.course, req.body.lesson, req.body.student).then(lessonsCompleted => {
+                        lessonsModel.getLessons(req.body.course).then(lessonsInCourse => 
+                        {
+                            lessonsModel.StudentLessonCompleted(req.body.course, req.body.student).then(lessonsCompleted => {
 
                                 if( lessonsInCourse.length == lessonsCompleted.length )
                                 {
