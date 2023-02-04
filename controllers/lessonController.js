@@ -54,26 +54,21 @@ exports.viewLesson = async (req, res, next) =>
     let user = req.session.user;
     res.locals.url = req.url;
     try{
-        let course = await lessonsModel.getCourseofLesson(req.params.lesson_id, user.id);
-
-        if( course.status == 'Assigned' )
+        let lesson = await lessonsModel.getLessonById(req.params.lesson_id);
+        let course = await coursesModel.getCourse(lesson.course_id);
+        if( user.type == 'Student' )
         {
-            req.session.error = 'Please accept the course before accessing lessions.';
-            req.session.success = '';
-            res.redirect('/courses/view/'+course.id);
-        }
-        else
-        {
-            await lessonsModel.getLesson(course.id, req.params.lesson_id).then(lesson => 
+            let course_assigned = await courseAssignModel.getCourseAssigned(user.id, course.id);
+            if( course.status == 'Assigned' )
             {
-                res.render('lessons/view', {user:user,title:'Lessons',page_title:'Lessons',course:course,lesson:lesson});   
-
-            }).catch(err => {
-                req.session.error = err.message;
+                req.session.error = 'Please accept the course before accessing lessions.';
                 req.session.success = '';
-                res.redirect('/lessons');
-            });
+                res.redirect('/courses/view/'+course.id);
+            }
         }
+        
+        res.render('lessons/view', {user:user,title:'Lessons',page_title:'Lessons',course:course,lesson:lesson});  
+        
     } catch (err){
         req.session.error = err.message;
         req.session.success = '';

@@ -120,7 +120,7 @@ exports.getStudentLessons = async (course_id, student_id) => {
     }
 }
 
-exports.getLesson = async (course_id,lession_id) => {
+exports.getLesson = async (course_id, lession_id) => {
 
     let db_con = await mysql.dbconnect();
     if( db_con )
@@ -130,6 +130,35 @@ exports.getLesson = async (course_id,lession_id) => {
             try{
                 const query = "SELECT * FROM lessons WHERE course_id = ? AND id = ? ";
                 db_con.query(query, [ course_id, lession_id ], (err, results) => 
+                {
+                    db_con.end();
+                    if (err) reject(new Error(err.message));
+
+                    resolve(results[0]);
+                });
+            }
+            catch(err)
+            {
+                reject(new Error(err.message));
+            }
+        });
+    }
+    else
+    {
+        return Promise.reject(new Error('Could not connect to database.'));
+    }
+}
+
+exports.getLessonById = async (lession_id) => {
+
+    let db_con = await mysql.dbconnect();
+    if( db_con )
+    {
+        return await new Promise((resolve, reject) => 
+        {
+            try{
+                const query = "SELECT * FROM lessons WHERE id = ? ";
+                db_con.query(query, [ lession_id ], (err, results) => 
                 {
                     db_con.end();
                     if (err) reject(new Error(err.message));

@@ -60,10 +60,9 @@ require('./routes/auth')(app);
 // Home
 app.get('/', auth.check, (req, res) => 
 {
-    res.locals = req.session;
     const user = req.session.user;
     res.locals.url = req.url;
-    res.render( user.type.toLowerCase()+'s/home', {title:'LMS - Home',page_title:'Home'});
+    res.render( user.type.toLowerCase()+'s/home', {user:user,title:'LMS - Home',page_title:'Home'});
 });
 
 require('./routes/account')(app);
