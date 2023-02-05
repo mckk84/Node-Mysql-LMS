@@ -1,15 +1,20 @@
 $(document).ready(function(){
 
-  $(".userMenu").click(function(){
+  $("#showpassword").click(function(){
+    var x = $("#password");
+    if (x.attr("type") === "password") {
+      x.attr("type", "text")
+    } else {
+      x.attr("type", "password")
+    }
+  });
 
+  $(".userMenu").click(function(){
     $(this).siblings('ul').toggleClass('invisible');
-    
   });
 
   $("svg.close-badge").click(function(){
-
     $(this).parent().parent().parent().hide();
-
   });
 
   $("button").click(function(e){

@@ -32,10 +32,12 @@
                   <% 
                   let product_id = 0;
                   Object.keys(rowObj).forEach(function(key, index){ 
-                    if( key !== 'created_at' ){ %>
-                    <td class="px-2 py-1 text-sm border-l border-r border-gray-300"><%=rowObj[key]%></td>
+                    if( key == 'created_at' || key == 'modified_at' ){ %>
+                    <td class="px-2 py-1 text-sm border-l border-r border-gray-300"><%=moment(rowObj[key]).format('DD-MM-YYYY')%></td>
+                    <% } else if ( key == 'description' ) { %>
+                    <td class="px-2 py-1 text-sm border-l border-r-2 border-gray-300"><%=rowObj[key].substr(0, 20)%>..</td>
                     <% } else { %>
-                    <td class="px-2 py-1 text-sm border-l border-r-2 border-gray-300"><%=moment(rowObj[key]).format('DD-MM-YYYY')%></td>
+                    <td class="px-2 py-1 text-sm border-l border-r-2 border-gray-300"><%=rowObj[key]%></td>
                     <% } %>
                   <% }); %>
                   <td class="px-2 py-1 border-l border-r border-gray-300">

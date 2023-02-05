@@ -1,0 +1,8 @@
+student@gmail.com
+@#Admin123
+
+instructor@gmail.com
+@#New123
+
+admin@gmail.com
+@#Pass123
